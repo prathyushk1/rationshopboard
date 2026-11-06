@@ -14,77 +14,92 @@ body{
   font-family:'Noto Sans Malayalam',sans-serif;
   color:#1a1c22;
   padding:0;
+  -webkit-text-size-adjust:100%;
 }
-.wrap{max-width:720px;margin:0 auto;padding:16px 10px 30px}
+.wrap{
+  max-width:720px;
+  margin:0 auto;
+  padding:10px 8px 30px;
+}
 
 /* Search Area */
 .search-area{
   background:#fff;
-  border-radius:12px;
-  padding:14px;
-  margin-bottom:14px;
-  box-shadow:0 2px 8px rgba(0,0,0,.06);
+  border-radius:10px;
+  padding:10px 12px;
+  margin-bottom:10px;
+  box-shadow:0 1px 4px rgba(0,0,0,.08);
 }
 .search-area label{
-  display:block;font-size:14px;font-weight:700;margin-bottom:8px;color:#334155;
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:6px;
+  color:#334155;
 }
-.search-row{display:flex;gap:8px}
+.search-row{display:flex;gap:6px}
 .search-row input{
   flex:1;
-  padding:11px 14px;
+  min-width:0;
+  padding:9px 12px;
   border:2px solid #cbd5e1;
   border-radius:8px;
-  font-size:20px;
+  font-size:18px;
   font-weight:800;
   font-family:inherit;
-  letter-spacing:2px;
+  letter-spacing:1.5px;
   outline:none;
   background:#f8fafc;
   color:#0f172a;
 }
 .search-row input:focus{border-color:#0d9488}
 .search-row button{
-  padding:11px 20px;
+  padding:9px 16px;
   background:#0d9488;
   color:#fff;
   border:0;
   border-radius:8px;
   font-family:inherit;
-  font-size:15px;
+  font-size:14px;
   font-weight:700;
   cursor:pointer;
   white-space:nowrap;
+  flex-shrink:0;
   transition:background .15s;
 }
 .search-row button:hover{background:#0f766e}
 .search-row button:disabled{opacity:.6;cursor:not-allowed}
-.search-msg{font-size:13px;font-weight:600;margin-top:6px;min-height:18px}
+.search-msg{font-size:12px;font-weight:600;margin-top:5px;min-height:16px}
 .search-msg.ok{color:#16a34a}
 .search-msg.err{color:#dc2626}
 
 /* Print Button */
-.print-bar{text-align:right;margin-bottom:10px}
+.print-bar{text-align:right;margin-bottom:8px}
 .print-bar button{
-  padding:10px 22px;
+  padding:8px 16px;
   background:#c8201a;
   color:#fff;
   border:0;
-  border-radius:8px;
+  border-radius:6px;
   font-family:inherit;
-  font-size:15px;
+  font-size:13px;
   font-weight:700;
   cursor:pointer;
 }
 .print-bar button:hover{background:#a71a15}
 
-/* ===== THE BOARD - exact match to physical ration shop board ===== */
-.board-scroll{overflow-x:auto;margin-bottom:10px}
+/* ===== THE BOARD - 100% width, mobile friendly, no horizontal overflow ===== */
+.board-scroll{
+  width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  margin-bottom:10px;
+}
 
 #board{
   background:#fff;
-  border:3px solid #1a5e1a;
+  border:2.5px solid #1a5e1a;
   border-radius:4px;
-  min-width:520px;
   width:100%;
   color:#000;
 }
@@ -93,34 +108,34 @@ body{
 .b-head{
   background:#2e7d32;
   color:#fff;
-  padding:8px 12px;
+  padding:6px 10px;
   display:flex;
   justify-content:space-between;
   align-items:baseline;
   flex-wrap:wrap;
-  gap:4px;
+  gap:2px;
 }
-.b-head .title{font-size:22px;font-weight:900}
-.b-head .title small{font-size:14px;font-weight:700}
-.b-head .date{font-size:18px;font-weight:800}
+.b-head .title{font-size:18px;font-weight:900}
+.b-head .title small{font-size:12px;font-weight:700}
+.b-head .date{font-size:15px;font-weight:800}
 
-/* Board Meta: shop & dealer info below green bar */
+/* Board Meta: shop & dealer info */
 .b-meta{
   background:#e8f5e9;
-  padding:8px 12px;
-  font-size:13px;
+  padding:6px 10px;
+  font-size:12px;
   font-weight:700;
   color:#1b5e20;
   border-bottom:2px solid #1a5e1a;
   display:flex;
   flex-direction:column;
-  gap:4px;
+  gap:3px;
 }
 .b-meta .meta-row{
   display:flex;
   justify-content:space-between;
   flex-wrap:wrap;
-  gap:8px;
+  gap:6px;
 }
 .dealer-tag{
   color:#0f5132;
@@ -128,38 +143,47 @@ body{
   border-bottom:1px dashed #2e7d32;
   padding:0 2px;
 }
-.dealer-tag:hover{
-  background:#c8e6c9;
-}
 
 /* Board Table */
-#board table{width:100%;border-collapse:collapse}
+#board table{
+  width:100%;
+  border-collapse:collapse;
+  table-layout:fixed;
+}
 #board th,#board td{
-  border:2px solid #1a5e1a;
-  padding:6px 5px;
+  border:1.5px solid #1a5e1a;
+  padding:6px 2px;
   text-align:center;
   vertical-align:middle;
+  overflow:hidden;
+  word-break:break-word;
 }
 
-/* Column header row - colored backgrounds matching physical board */
-#board th{font-size:15px;font-weight:900;color:#000}
+/* Column header row */
+#board th{
+  font-size:12.5px;
+  font-weight:900;
+  color:#000;
+  line-height:1.2;
+}
 #board th.h-item{background:#cfe6f7;width:22%}
-#board th.h-aay{background:#fbf0a8;width:18%}
-#board th.h-phh{background:#dcd6f2;width:20%}
-#board th.h-nps{background:#d4ecc8;width:20%}
-#board th.h-npns{background:#f6cfd6;width:20%}
+#board th.h-aay{background:#fbf0a8;width:19.5%}
+#board th.h-phh{background:#dcd6f2;width:19.5%}
+#board th.h-nps{background:#d4ecc8;width:19.5%}
+#board th.h-npns{background:#f6cfd6;width:19.5%}
 
 /* Data cells */
 #board td.c-item{
   text-align:left;
-  padding-left:8px;
+  padding-left:5px;
   font-weight:900;
-  font-size:17px;
+  font-size:14px;
   background:#fffde7;
+  line-height:1.2;
 }
 #board td.c-val{
   font-weight:800;
-  font-size:19px;
+  font-size:16px;
   color:#1a237e;
   background:#fff;
 }
@@ -167,27 +191,40 @@ body{
   color:#bbb;
   font-weight:400;
   background:#fff;
+  font-size:14px;
 }
 
 /* Special row */
 #board tr.row-special td{
   background:#fffde7;
   font-weight:800;
-  font-size:15px;
-  height:50px;
+  font-size:13.5px;
+  height:40px;
   text-align:left;
-  padding-left:8px;
+  padding-left:5px;
 }
 
 /* Board Footer */
 .b-foot{
   background:#e8f5e9;
-  padding:4px 10px;
-  font-size:11px;
+  padding:3px 8px;
+  font-size:10.5px;
   font-weight:600;
   color:#2e7d32;
   text-align:right;
-  border-top:2px solid #1a5e1a;
+  border-top:1.5px solid #1a5e1a;
+}
+
+/* Desktop enhancements */
+@media (min-width: 600px){
+  .wrap{padding:16px 14px 40px}
+  .b-head .title{font-size:22px}
+  .b-head .date{font-size:18px}
+  .b-meta{font-size:13px;padding:8px 12px}
+  #board th{font-size:15px;padding:7px 4px}
+  #board td.c-item{font-size:16px;padding-left:8px}
+  #board td.c-val{font-size:18px}
+  #board tr.row-special td{font-size:15px;height:48px;padding-left:8px}
 }
 
 /* Print */
@@ -196,14 +233,14 @@ body{
   .noprint{display:none!important}
   .wrap{max-width:none;padding:0}
   .board-scroll{overflow:visible}
-  #board{min-width:100%;border:3px solid #000}
+  #board{width:100%;border:3px solid #000}
   #board th,#board td{border-color:#000}
-  #board table{font-size:22px}
-  #board th{font-size:18px}
-  #board td.c-val{font-size:24px;color:#000}
+  #board table{font-size:20px}
+  #board th{font-size:16px}
+  #board td.c-val{font-size:22px;color:#000}
   .b-head{background:#2e7d32;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .b-head .title{font-size:28px}
-  .b-head .date{font-size:22px}
+  .b-head .title{font-size:26px}
+  .b-head .date{font-size:20px}
   .b-meta{background:#fff!important;border-bottom-color:#000!important}
   .dealer-tag{border-bottom:none!important}
   #board th.h-item,#board th.h-aay,#board th.h-phh,#board th.h-nps,#board th.h-npns{
@@ -244,7 +281,7 @@ body{
  <div class="b-meta" id="bMeta" style="display:none">
   <div class="meta-row">
    <span><b>ARD:</b> <span id="bArd">—</span></span>
-   <span><b>ലൈസൻസി / വ്യാപാരി:</b> <span id="bDealer" class="dealer-tag" onclick="editDealerName()" title="പേര് മാറ്റാൻ ക്ലിക്ക് ചെയ്യുക">—</span></span>
+   <span><b>വ്യാപാരി:</b> <span id="bDealer" class="dealer-tag" onclick="editDealerName()" title="പേര് മാറ്റാൻ ക്ലിക്ക് ചെയ്യുക">—</span></span>
   </div>
   <div class="meta-row">
    <span><b>ഓഫീസ്:</b> <span id="bTso">—</span></span>
@@ -262,7 +299,7 @@ body{
    </tr>
   </thead>
   <tbody id="bBody">
-   <tr><td colspan="5" style="padding:30px;color:#888;font-weight:700">
+   <tr><td colspan="5" style="padding:25px 8px;color:#888;font-weight:700">
     ARD നമ്പർ നൽകി "സ്റ്റോക്ക് എടുക്കുക" അമർത്തുക
    </td></tr>
   </tbody>
@@ -278,28 +315,30 @@ body{
 </div>
 
 <script>
-/* ---- Commodity mapping ---- */
+/* ---- Commodity mapping & consolidation ---- */
 var MAL = {
- "Raw rice":"പച്ചരി","Fort.RR":"പച്ചരി","PMGKAY RR":"പച്ചരി","Raw rice SPL":"പച്ചരി",
- "Boiled rice":"പുഴുക്കലരി","Fort.BR":"പുഴുക്കലരി","BR F. SPL":"പുഴുക്കലരി",
+ "Raw rice":"പച്ചരി","Fort.RR":"പച്ചരി","PMGKAY RR":"പച്ചരി","Raw rice SPL":"പച്ചരി","Free RR":"പച്ചരി","Special RR":"പച്ചരി",
+ "Boiled rice":"പുഴുക്കലരി","Fort.BR":"പുഴുക്കലരി","BR F. SPL":"പുഴുക്കലരി","Special BR":"പുഴുക്കലരി",
  "Boiled rice SPL":"പുഴുക്കലരി","Fort.CMR":"പുഴുക്കലരി","CMR":"പുഴുക്കലരി",
  "Matta rice":"മട്ട അരി","Matta rice SPL":"മട്ട അരി",
  "Wheat":"ഗോതമ്പ്","PMGKAY Wheat":"ഗോതമ്പ്",
  "Atta":"ആട്ട","Fort.Atta":"ആട്ട",
  "Sugar":"പഞ്ചസാര","Koil":"മണ്ണെണ്ണ",
- "RAGI":"റാഗി","Ragi":"റാഗി","RAGI POWDER":"റാഗി പൊടി","Ragi Powder":"റാഗി പൊടി"
+ "RAGI":"റാഗി","Ragi":"റാഗി","RAGI POWDER":"റാഗി പൊടി","Ragi Powder":"റാഗി പൊടി",
+ "Spl. Festival Kit":"കിറ്റ്","Festival Kit":"കിറ്റ്","FreeKit":"കിറ്റ്","Free Kit":"കിറ്റ്"
 };
 
 function getRowKey(item){
  if(MAL[item])return MAL[item];
  if(/matta/i.test(item))return "മട്ട അരി";
- if(/fort\.?rr|raw\s*rice|pmgkay\s*rr/i.test(item))return "പച്ചരി";
- if(/fort\.?br|boiled\s*rice|cmr|br\s*f\./i.test(item))return "പുഴുക്കലരി";
+ if(/fort\.?rr|raw\s*rice|free\s*rr|special\s*rr|pmgkay\s*rr/i.test(item))return "പച്ചരി";
+ if(/fort\.?br|boiled\s*rice|special\s*br|cmr|br\s*f\./i.test(item))return "പുഴുക്കലരി";
  if(/wheat/i.test(item))return "ഗോതമ്പ്";
  if(/atta/i.test(item))return "ആട്ട";
  if(/sugar/i.test(item))return "പഞ്ചസാര";
  if(/koil|kerosene/i.test(item))return "മണ്ണെണ്ണ";
  if(/ragi/i.test(item))return (/powder/i.test(item) ? "റാഗി പൊടി" : "റാഗി");
+ if(/kit/i.test(item))return "കിറ്റ്";
  return item;
 }
 
@@ -321,9 +360,11 @@ function parseText(text){
   if(!header){
    var hm = line.match(/Stock Register for FPS (\d+)(?:\s*[-–]\s*([A-Za-z\s.]+))?\s*(?:\(District:\s*([^/]+)\/\s*TSO:\s*([^)]+)\))?\s*(?:for\s*(.+))?/i);
    if(hm){
+    var rawDealer = hm[2] ? hm[2].trim() : "";
+    if(/district|tso|month|year/i.test(rawDealer)) rawDealer = "";
     header = {
       ard: hm[1],
-      dealer: hm[2] ? hm[2].trim() : "",
+      dealer: rawDealer,
       dist: (hm[3] || "").trim(),
       tso: (hm[4] || "").trim(),
       period: (hm[5] || "").trim()
@@ -365,9 +406,11 @@ function parseText(text){
  if(!header){
   var hg = text.replace(/\s+/g, " ").match(/Stock Register for FPS (\d+)(?:\s*[-–]\s*([A-Za-z\s.]+))?\s*(?:\(District:\s*([^/]+)\/\s*TSO:\s*([^)]+)\))?\s*(?:for\s*(.+?)(?:\s|$))?/i);
   if(hg){
+    var rawD = hg[2] ? hg[2].trim() : "";
+    if(/district|tso|month|year/i.test(rawD)) rawD = "";
     header = {
       ard: hg[1],
-      dealer: hg[2] ? hg[2].trim() : "",
+      dealer: rawD,
       dist: (hg[3] || "").trim(),
       tso: (hg[4] || "").trim(),
       period: (hg[5] || "").trim()
@@ -435,7 +478,8 @@ function renderBoard(text, dealerFromApi){
 
   // Resolve dealer name: custom saved > API fetched > parsed from text
   var dName = DEALERS[currentArd] || dealerFromApi || (res.header && res.header.dealer) || "";
-  if(dealerFromApi && !DEALERS[currentArd]){
+  if(dName && /district|tso|month/i.test(dName)) dName = "";
+  if(dealerFromApi && !DEALERS[currentArd] && !/district|tso|month/i.test(dealerFromApi)){
    DEALERS[currentArd] = dealerFromApi;
    try{localStorage.setItem("rsb_dealers", JSON.stringify(DEALERS));}catch(e){}
   }
@@ -453,7 +497,7 @@ function renderBoard(text, dealerFromApi){
  /* Build table */
  if(!entries.length){
   document.getElementById("bBody").innerHTML =
-   '<tr><td colspan="5" style="padding:30px;color:#888;font-weight:700">' +
+   '<tr><td colspan="5" style="padding:25px 8px;color:#888;font-weight:700">' +
    'ഡാറ്റ ലഭ്യമല്ല</td></tr>';
   return;
  }
@@ -467,7 +511,16 @@ function renderBoard(text, dealerFromApi){
  var allRows = ROWS.concat(extraRows);
  allRows.forEach(function(name){
   var d = data[name];
-  if(!d || !d.has) return;
+  if(!d) return;
+
+  var isStandard = ROWS.indexOf(name) >= 0;
+  var totalVal = Math.abs(d.aay) + Math.abs(d.phh) + Math.abs(d.nps) + Math.abs(d.npns) + Math.abs(d.all);
+
+  // For non-standard extra rows, ONLY show if stock is non-zero
+  if(!isStandard && totalVal < 0.05) return;
+
+  // For standard rows, if completely unused/no data, can still show or skip
+  if(!d.has && totalVal < 0.05) return;
 
   var aay = fv(d.aay);
   var phh = fv(d.phh);

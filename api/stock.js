@@ -65,7 +65,7 @@ module.exports = async (req, res) => {
     let dealerName = "";
     try {
       const controller0 = new AbortController();
-      const t0 = setTimeout(() => controller0.abort(), 10000);
+      const t0 = setTimeout(() => controller0.abort(), 8000);
       const url0 = `${BASE}/Stock_Register_Interface.jsp?dist_code=${dist}&office_code=${tso}`;
       const r0 = await fetch(url0, {
         headers: { "User-Agent": UA },
@@ -73,23 +73,26 @@ module.exports = async (req, res) => {
       });
       clearTimeout(t0);
 
-        if (typeof r0.headers.getSetCookie === "function") {
-          const sc = r0.headers.getSetCookie();
-          cookie = sc.map((c) => c.split(";")[0]).join("; ");
-        } else if (r0.headers.get("set-cookie")) {
-          cookie = r0.headers.get("set-cookie").split(";")[0];
-        }
-
-        const html0 = await r0.text();
-        // Dropdown option pattern: e.g. <option value="2367097">2367097 (ManojkumarC)</option>
-        const nameRe = new RegExp(`${ard}\\s*\\(([^)]+)\\)`, "i");
-        const nm0 = html0.match(nameRe);
-        if (nm0 && nm0[1]) {
-          dealerName = nm0[1].trim();
-        }
-      } catch (e) {
-        // Proceed even if initial fetch encounters issue
+      if (typeof r0.headers.getSetCookie === "function") {
+        const sc = r0.headers.getSetCookie();
+        cookie = sc.map((c) => c.split(";")[0]).join("; ");
+      } else if (r0.headers.get("set-cookie")) {
+        cookie = r0.headers.get("set-cookie").split(";")[0];
       }
+
+      const html0 = await r0.text();
+      // Dropdown option pattern: e.g. <option value="2367097">2367097 (ManojkumarC)</option>
+      const nameRe = new RegExp(`${ard}\\s*\\(([^)]+)\\)`, "i");
+      const nm0 = html0.match(nameRe);
+      if (nm0 && nm0[1]) {
+        const candidate = clean(nm0[1]);
+        if (!/district|tso|month|year|fps|stock/i.test(candidate)) {
+          dealerName = candidate;
+        }
+      }
+    } catch (e) {
+      // Proceed even if initial fetch encounters issue
+    }
 
     // 2) POST request to fetch Scheme Wise Stock Register
     const body = new URLSearchParams({
@@ -101,7 +104,7 @@ module.exports = async (req, res) => {
     }).toString();
 
     const controller1 = new AbortController();
-    const t1 = setTimeout(() => controller1.abort(), 20000);
+    const t1 = setTimeout(() => controller1.abort(), 16000);
 
     const r = await fetch(BASE + "/fps_stock_register.action", {
       method: "POST",
@@ -122,43 +125,37 @@ module.exports = async (req, res) => {
       return res.status(502).json({ error: "Portal error: HTTP " + r.status });
     }
 
-        // If dealerName wasn't in interface page, check stock register html
-        if (!dealerName) {
-          const match1 = html.match(new RegExp(`${ard}\\s*\\(([^)]+)\\)`, "i"));
-          if (match1 && match1[1]) {
-            dealerName = match1[1].trim();
-          } else {
-            const match2 = html.match(/Dealer\s*Name\s*[:\t-]\s*([^\n<]+)/i) ||
-              html.match(new RegExp(`${ard}\\s*[-–]\\s*([A-Za-z\\s\\.]{3,35})[\\n<]`, "i"));
-            if (match2 && match2[1]) {
-              dealerName = clean(match2[1]);
-            }
-          }
-        }
-
-        const lines = tableToLines(html);
-        if (lines.length < 2) {
-          if (/no\s*record/i.test(html)) {
-            return res.status(404).json({ error: "ഈ ARD നമ്പറിന് ഈ മാസത്തിൽ സ്റ്റോക്ക് റെക്കോർഡുകൾ ലഭ്യമല്ല (No records found)" });
-          }
-          return res.status(502).json({ error: "പോർട്ടൽ പേജിൽ നിന്ന് ടേബിൾ വിവരങ്ങൾ വായിക്കാൻ കഴിഞ്ഞില്ല" });
-        }
-
-        res.setHeader("Cache-Control", "no-store");
-        return res.status(200).json({
-          fetchedAt: new Date().toISOString(),
-          text: lines.join("\n"),
-          dealerName: dealerName || "",
-          ard: ard,
-          dist: dist,
-          tso: tso,
-        });
-      } catch (e) {
-        const isTimeout = e && (e.name === "AbortError" || /abort|timeout/i.test(e.message));
-        return res.status(500).json({
-          error: isTimeout ? "പോർട്ടൽ പ്രതികരിക്കാൻ കൂടുതൽ സമയമെടുത്തു (Timeout). വീണ്ടും ശ്രമിക്കുക." : String(e && e.message || e),
-        });
+    // If dealerName wasn't in interface page, check stock register html carefully (avoid matching District / TSO header)
+    if (!dealerName) {
+      const match1 = html.match(new RegExp(`${ard}\\s*\\(([^)]+)\\)`, "i"));
+      if (match1 && match1[1] && !/district|tso|month/i.test(match1[1])) {
+        dealerName = clean(match1[1]);
       }
-  };
+    }
 
-  module.exports.tableToLines = tableToLines;
+    const lines = tableToLines(html);
+    if (lines.length < 2) {
+      if (/no\s*record/i.test(html)) {
+        return res.status(404).json({ error: "ഈ ARD നമ്പറിന് ഈ മാസത്തിൽ സ്റ്റോക്ക് റെക്കോർഡുകൾ ലഭ്യമല്ല (No records found)" });
+      }
+      return res.status(502).json({ error: "പോർട്ടൽ പേജിൽ നിന്ന് ടേബിൾ വിവരങ്ങൾ വായിക്കാൻ കഴിഞ്ഞില്ല" });
+    }
+
+    res.setHeader("Cache-Control", "no-store");
+    return res.status(200).json({
+      fetchedAt: new Date().toISOString(),
+      text: lines.join("\n"),
+      dealerName: dealerName || "",
+      ard: ard,
+      dist: dist,
+      tso: tso,
+    });
+  } catch (e) {
+    const isTimeout = e && (e.name === "AbortError" || /abort|timeout/i.test(e.message));
+    return res.status(500).json({
+      error: isTimeout ? "പോർട്ടൽ പ്രതികരിക്കാൻ കൂടുതൽ സമയമെടുത്തു (Timeout). വീണ്ടും ശ്രമിക്കുക." : String(e && e.message || e),
+    });
+  }
+};
+
+module.exports.tableToLines = tableToLines;
