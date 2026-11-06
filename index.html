@@ -81,47 +81,34 @@ html,body{
 }
 .search-row button:disabled{opacity:.6}
 
-.search-helper{
-  font-size:11.5px;
-  font-weight:700;
-  color:#15803d;
-  background:#f0fdf4;
-  border:1px solid #bbf7d0;
-  border-radius:4px;
-  padding:3px 8px;
-  margin-top:6px;
-  display:none;
-}
 .search-msg{font-size:11.5px;font-weight:600;margin-top:4px;min-height:15px}
 .search-msg.ok{color:#16a34a}
 .search-msg.err{color:#dc2626}
 
-/* Action Bar: WhatsApp, Refresh, Print */
+/* Action Bar: WhatsApp, Print */
 .action-bar{
   display:flex;
-  gap:6px;
+  gap:8px;
   margin-bottom:8px;
 }
 .action-bar button{
   flex:1;
-  padding:7px 4px;
+  padding:8px 8px;
   border:0;
   border-radius:6px;
   font-family:inherit;
-  font-size:12px;
+  font-size:12.5px;
   font-weight:700;
   cursor:pointer;
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  gap:4px;
+  gap:5px;
   white-space:nowrap;
   box-shadow:0 1px 2px rgba(0,0,0,.08);
 }
 .btn-wa{background:#25d366;color:#0b3b19}
 .btn-wa:hover{background:#20bd5a}
-.btn-refresh{background:#0284c7;color:#fff}
-.btn-refresh:hover{background:#0369a1}
 .btn-print{background:#c8201a;color:#fff}
 .btn-print:hover{background:#a61a15}
 
@@ -339,19 +326,17 @@ html,body{
  <label for="ard">റേഷൻ കടയുടെ ARD നമ്പർ (7 അക്കം):</label>
  <div class="search-row">
   <input id="ard" inputmode="numeric" maxlength="7" placeholder="7 അക്ക ARD നമ്പർ"
-   oninput="onArdInput(this.value)"
+   oninput="this.value=this.value.replace(/\D/g,'')"
    onkeydown="if(event.key==='Enter')doSearch()">
   <button onclick="doSearch()">സ്റ്റോക്ക് എടുക്കുക</button>
  </div>
- <div id="searchHelper" class="search-helper"></div>
  <div id="statusMsg" class="search-msg"></div>
 </div>
 
-<!-- Actions: WhatsApp, Refresh, Print -->
+<!-- Actions: WhatsApp, Print -->
 <div class="action-bar noprint">
  <button class="btn-wa" onclick="shareToWhatsApp()" title="വാട്സാപ്പിൽ പങ്കിടുക">📲 വാട്സാപ്പിൽ ഷെയർ</button>
- <button class="btn-refresh" onclick="doSearch(true)" title="സ്റ്റോക്ക് വീണ്ടും എടുക്കുക">🔄 പുതുക്കുക</button>
- <button class="btn-print" onclick="window.print()" title="ബോർഡ് പ്രിന്റ് ചെയ്യുക">🖨 പ്രിന്റ്</button>
+ <button class="btn-print" onclick="window.print()" title="ബോർഡ് പ്രിന്റ് ചെയ്യുക">🖨 പ്രിന്റ് ചെയ്യുക</button>
 </div>
 
 <!-- Board -->
@@ -543,20 +528,6 @@ function getDistrictAndTso(ard, apiDist, apiTso){
   var full = "District: " + distName;
   if(tsoName) full += " / TSO: " + tsoName;
   return {dist:distName, tso:tsoName, full:full};
-}
-
-/* Helper on typing ARD */
-function onArdInput(val){
-  val = val.replace(/\D/g, "");
-  document.getElementById("ard").value = val;
-  var helper = document.getElementById("searchHelper");
-  if(val.length >= 2){
-    var loc = getDistrictAndTso(val);
-    helper.style.display = "block";
-    helper.textContent = "📍 " + loc.full;
-  } else {
-    helper.style.display = "none";
-  }
 }
 
 /* ---- Commodity mapping & consolidation ---- */
@@ -919,9 +890,6 @@ function shareToWhatsApp(){
 var CFG = {ard:""};
 try{var c = localStorage.getItem("rsb_cfg"); if(c) CFG = JSON.parse(c);}catch(e){}
 document.getElementById("ard").value = CFG.ard || "";
-if(CFG.ard && CFG.ard.length >= 2){
-  onArdInput(CFG.ard);
-}
 
 function doSearch(isFresh){
  var ardVal = document.getElementById("ard").value.replace(/\D/g, "");
@@ -952,12 +920,9 @@ function doSearch(isFresh){
  msg.className = "search-msg";
  msg.textContent = "ePOS പോർട്ടലിൽ നിന്ന് സ്റ്റോക്ക് എടുക്കുന്നു...";
 
- var url = "/api/stock?dist=" + dist + "&tso=" + tso + "&ard=" + ardVal + "&month=" + (d.getMonth() + 1) + "&year=" + d.getFullYear();
- if(isFresh){
-   url += "&fresh=" + Date.now();
- }
+ var url = "/api/stock?dist=" + dist + "&tso=" + tso + "&ard=" + ardVal + "&month=" + (d.getMonth() + 1) + "&year=" + d.getFullYear() + "&_t=" + Date.now();
 
- fetch(url)
+ fetch(url, { cache: "no-store" })
   .then(function(r){return r.json();})
   .then(function(j){
    if(j.error){
@@ -966,11 +931,12 @@ function doSearch(isFresh){
     document.getElementById("bDealer").textContent = DEALERS[ardVal] || "—";
     return;
    }
+   var nowIso = new Date().toISOString();
    try{
      localStorage.setItem("rsb_text", j.text);
-     localStorage.setItem("rsb_time", j.fetchedAt || new Date().toISOString());
+     localStorage.setItem("rsb_time", nowIso);
    }catch(e){}
-   renderBoard(j.text, j.dealerName, j.districtName, j.tsoName, ardVal, j.fetchedAt);
+   renderBoard(j.text, j.dealerName, j.districtName, j.tsoName, ardVal, nowIso);
    msg.className = "search-msg ok";
    msg.textContent = "സ്റ്റോക്ക് വിജയകരമായി ലഭിച്ചു ✓";
   })

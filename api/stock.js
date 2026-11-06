@@ -271,9 +271,9 @@ module.exports = async (req, res) => {
       return res.status(502).json({ error: "പോർട്ടൽ പേജിൽ നിന്ന് ടേബിൾ വിവരങ്ങൾ വായിക്കാൻ കഴിഞ്ഞില്ല" });
     }
 
-    // Cache on Vercel Edge for 3 minutes (s-maxage=180) to handle thousands of concurrent users
-    // If &fresh=1 or cache-busting timestamp is sent, Vercel fetches live from portal
-    res.setHeader("Cache-Control", "public, s-maxage=180, stale-while-revalidate=600");
+    res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+    res.setHeader("Pragma", "no-cache");
+    res.setHeader("Expires", "0");
     return res.status(200).json({
       fetchedAt: new Date().toISOString(),
       text: lines.join("\n"),
