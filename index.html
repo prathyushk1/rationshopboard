@@ -6,7 +6,7 @@
 <title>റേഷൻ സ്റ്റോക്ക് ബോർഡ്</title>
 
 <!-- PWA & Mobile Meta -->
-<meta name="theme-color" content="#2e7d32">
+<meta name="theme-color" content="#b91c1c">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="റേഷൻ ബോർഡ്">
@@ -23,9 +23,9 @@ html,body{
   width:100%;
   max-width:100vw;
   overflow-x:hidden;
-  background:#e8ecf2;
+  background:#f1f5f9;
   font-family:'Noto Sans Malayalam',sans-serif;
-  color:#1a1c22;
+  color:#0f172a;
   -webkit-text-size-adjust:100%;
 }
 .wrap{
@@ -65,10 +65,10 @@ html,body{
   background:#f8fafc;
   color:#0f172a;
 }
-.search-row input:focus{border-color:#0d9488}
+.search-row input:focus{border-color:#b91c1c}
 .search-row button{
-  padding:8px 12px;
-  background:#0d9488;
+  padding:8px 14px;
+  background:#b91c1c;
   color:#fff;
   border:0;
   border-radius:6px;
@@ -80,7 +80,6 @@ html,body{
   flex-shrink:0;
 }
 .search-row button:disabled{opacity:.6}
-
 .search-msg{font-size:11.5px;font-weight:600;margin-top:4px;min-height:15px}
 .search-msg.ok{color:#16a34a}
 .search-msg.err{color:#dc2626}
@@ -109,10 +108,10 @@ html,body{
 }
 .btn-wa{background:#25d366;color:#0b3b19}
 .btn-wa:hover{background:#20bd5a}
-.btn-print{background:#c8201a;color:#fff}
-.btn-print:hover{background:#a61a15}
+.btn-print{background:#334155;color:#fff}
+.btn-print:hover{background:#1e293b}
 
-/* ===== THE BOARD - 100% width, zero overflow on mobile ===== */
+/* ===== THE BOARD - Exact match to user screenshot ===== */
 .board-scroll{
   width:100%;
   max-width:100%;
@@ -124,39 +123,42 @@ html,body{
   width:100%;
   max-width:100%;
   background:#fff;
-  border:2px solid #1a5e1a;
-  border-radius:4px;
+  border:2px solid #000;
+  border-radius:0;
   color:#000;
   overflow:hidden;
+  box-shadow:0 1px 4px rgba(0,0,0,.08);
 }
 
-/* Board Header */
-.b-head{
-  background:#2e7d32;
-  color:#fff;
-  padding:5px 8px;
+/* Board Header Title */
+.b-head-bar{
+  padding:10px 8px 6px;
+  background:#fff;
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
-.b-head .title{font-size:15.5px;font-weight:900}
-.b-head .title small{font-size:11px;font-weight:700}
-.b-head .head-right{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-end;
-  gap:1px;
+.b-red-title{
+  font-size:20px;
+  font-weight:900;
+  color:#c02626;
+  letter-spacing:-0.3px;
 }
-.b-head .date{font-size:12.5px;font-weight:800}
-.b-head .time{font-size:10px;font-weight:700;opacity:0.92}
+.b-date-time{
+  font-size:11px;
+  font-weight:700;
+  color:#64748b;
+  text-align:right;
+}
 
 /* Board Meta Info */
 .b-meta{
-  background:#f4f9f4;
+  background:#f8fafc;
   padding:5px 8px;
-  font-size:11.5px;
-  color:#1b5e20;
-  border-bottom:1.5px solid #1a5e1a;
+  font-size:11px;
+  color:#334155;
+  border-top:1px solid #e2e8f0;
+  border-bottom:1.5px solid #000;
   display:flex;
   flex-direction:column;
   gap:3px;
@@ -168,7 +170,7 @@ html,body{
   gap:6px;
   min-width:0;
 }
-.b-meta b{color:#0d531a;font-weight:800}
+.b-meta b{color:#0f172a;font-weight:800}
 .meta-col{
   min-width:0;
   white-space:nowrap;
@@ -181,97 +183,95 @@ html,body{
 .loc-badge{
   font-size:11px;
   font-weight:800;
-  color:#14532d;
-  background:#dcfce7;
+  color:#0f172a;
+  background:#e2e8f0;
   padding:1px 6px;
   border-radius:4px;
-  border:1px solid #86efac;
+  border:1px solid #cbd5e1;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
   max-width:72%;
 }
 .dealer-tag{
-  color:#0f5132;
+  color:#0f172a;
   font-weight:800;
   cursor:pointer;
-  border-bottom:1px dashed #2e7d32;
+  border-bottom:1px dashed #64748b;
   padding:0 2px;
 }
 
-/* Board Table */
+/* Table - 6 Columns */
 #board table{
   width:100%;
   border-collapse:collapse;
   table-layout:fixed;
 }
 #board th,#board td{
-  border:1.5px solid #1a5e1a;
-  padding:4px 1px;
+  border:1.5px solid #000;
+  padding:6px 1px;
   text-align:center;
   vertical-align:middle;
   overflow:hidden;
 }
 
-/* Column headers */
+/* Column headers matching screenshot */
 #board th{
   font-size:11px;
   font-weight:900;
   color:#000;
-  line-height:1.15;
+  line-height:1.2;
   word-wrap:break-word;
-  hyphens:auto;
+  padding:7px 1px;
 }
-#board th.h-item{background:#cfe6f7;width:22%}
-#board th.h-aay{background:#fbf0a8;width:19.5%}
-#board th.h-phh{background:#dcd6f2;width:19.5%}
-#board th.h-nps{background:#d4ecc8;width:19.5%}
-#board th.h-npns{background:#f6cfd6;width:19.5%}
+#board th.h-item{background:#ffffff;width:24%}
+#board th.h-aay{background:#fde047;width:15.2%}
+#board th.h-phh{background:#f472b6;width:15.2%}
+#board th.h-nps{background:#38bdf8;width:15.2%}
+#board th.h-npns{background:#ffffff;width:15.2%}
+#board th.h-npi{background:#ffffff;width:15.2%}
 
 /* Data cells */
 #board td.c-item{
   text-align:left;
-  padding-left:4px;
-  font-weight:900;
-  font-size:12.5px;
-  background:#fffde7;
+  padding-left:5px;
+  font-weight:800;
+  font-size:12px;
+  color:#000;
+  background:#fff;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
 }
 #board td.c-val{
-  font-weight:800;
-  font-size:14px;
-  color:#1a237e;
+  font-weight:700;
+  font-size:12px;
+  color:#000;
   background:#fff;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  white-space:nowrap;
 }
 #board td.c-empty{
-  color:#bbb;
-  font-weight:400;
   background:#fff;
-  font-size:12px;
+}
+#board td.c-merged{
+  font-weight:700;
+  font-size:12.5px;
+  color:#000;
+  background:#fff;
+  text-align:center;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
 }
 
-/* Special row */
-#board tr.row-special td{
-  background:#fffde7;
-  font-weight:800;
-  font-size:12px;
-  height:32px;
-  text-align:left;
-  padding-left:4px;
-}
-
-/* Board Footer */
+/* Footer */
 .b-foot{
-  background:#f4f9f4;
-  padding:3px 6px;
+  background:#f8fafc;
+  padding:4px 6px;
   font-size:10px;
   font-weight:700;
-  color:#2e7d32;
+  color:#64748b;
   text-align:right;
-  border-top:1.5px solid #1a5e1a;
+  border-top:1.5px solid #000;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
@@ -280,15 +280,14 @@ html,body{
 /* Larger screens */
 @media (min-width: 600px){
   .wrap{padding:14px 10px 30px}
-  .b-head .title{font-size:20px}
-  .b-head .date{font-size:15px}
-  .b-head .time{font-size:12px}
+  .b-red-title{font-size:26px}
+  .b-date-time{font-size:13px}
   .b-meta{font-size:13px;padding:7px 10px;gap:5px}
   .loc-badge{font-size:12px;padding:2px 8px}
-  #board th{font-size:14px;padding:6px 3px}
-  #board td.c-item{font-size:15px;padding-left:6px}
-  #board td.c-val{font-size:17px}
-  #board tr.row-special td{font-size:14px;height:42px}
+  #board th{font-size:13.5px;padding:8px 3px}
+  #board td.c-item{font-size:14px;padding-left:8px}
+  #board td.c-val{font-size:14px}
+  #board td.c-merged{font-size:14px}
   .action-bar{max-width:400px;margin-left:auto}
   .action-bar button{font-size:13px;padding:8px 12px}
 }
@@ -298,22 +297,18 @@ html,body{
   body{background:#fff!important}
   .noprint{display:none!important}
   .wrap{max-width:none;padding:0}
-  #board{width:100%;border:3px solid #000}
+  #board{width:100%;border:3px solid #000;box-shadow:none}
   #board th,#board td{border-color:#000}
-  #board table{font-size:20px}
-  #board th{font-size:16px}
-  #board td.c-val{font-size:22px;color:#000}
-  .b-head{background:#2e7d32;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .b-head .title{font-size:26px}
-  .b-head .date{font-size:20px}
-  .b-head .time{display:none}
+  #board table{font-size:16px}
+  #board th{font-size:15px}
+  #board td.c-val,#board td.c-merged{font-size:15px;color:#000}
+  .b-red-title{font-size:28px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .b-meta{background:#fff!important;border-bottom-color:#000!important}
   .dealer-tag{border-bottom:none!important}
   .loc-badge{border-color:#000!important;background:#fff!important;color:#000!important}
-  #board th.h-item,#board th.h-aay,#board th.h-phh,#board th.h-nps,#board th.h-npns{
+  #board th.h-item,#board th.h-aay,#board th.h-phh,#board th.h-nps,#board th.h-npns,#board th.h-npi{
     -webkit-print-color-adjust:exact;print-color-adjust:exact;
   }
-  #board td.c-item{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   @page{size:A4 landscape;margin:8mm}
 }
 </style>
@@ -339,17 +334,12 @@ html,body{
  <button class="btn-print" onclick="window.print()" title="ബോർഡ് പ്രിന്റ് ചെയ്യുക">🖨 പ്രിന്റ് ചെയ്യുക</button>
 </div>
 
-<!-- Board -->
+<!-- Board (Exact match to user screenshot) -->
 <div class="board-scroll">
 <div id="board">
- <div class="b-head">
-  <div class="head-left">
-   <span class="title">സ്റ്റോക്ക് വിവരം <small>(കി ഗ്രാം)</small></span>
-  </div>
-  <div class="head-right">
-   <span class="date" id="bDate"></span>
-   <span class="time" id="bTime"></span>
-  </div>
+ <div class="b-head-bar">
+  <span class="b-red-title">സ്റ്റോക്ക് വിവരം (കി.ഗ്രാമിൽ)</span>
+  <span class="b-date-time" id="bDateTime"></span>
  </div>
  <div class="b-meta" id="bMeta" style="display:none">
   <div class="meta-row">
@@ -365,14 +355,15 @@ html,body{
   <thead>
    <tr>
     <th class="h-item">ഇനം</th>
-    <th class="h-aay">എ.എ.വൈ</th>
-    <th class="h-phh">പ്രയോരിറ്റി</th>
-    <th class="h-nps">എൻ പി<br>എസ്</th>
-    <th class="h-npns">എൻ പി<br>എൻ എസ്</th>
+    <th class="h-aay">എ.എ.<br>വൈ</th>
+    <th class="h-phh">മുൻഗ<br>ണന</th>
+    <th class="h-nps">എൻ.പി.<br>എസ്</th>
+    <th class="h-npns">എൻ.പി.<br>എൻ.എസ്</th>
+    <th class="h-npi">എൻ.പി.<br>ഐ</th>
    </tr>
   </thead>
   <tbody id="bBody">
-   <tr><td colspan="5" style="padding:25px 4px;color:#888;font-weight:700">
+   <tr><td colspan="6" style="padding:25px 4px;color:#888;font-weight:700">
     ARD നമ്പർ നൽകി "സ്റ്റോക്ക് എടുക്കുക" അമർത്തുക
    </td></tr>
   </tbody>
@@ -530,36 +521,6 @@ function getDistrictAndTso(ard, apiDist, apiTso){
   return {dist:distName, tso:tsoName, full:full};
 }
 
-/* ---- Commodity mapping & consolidation ---- */
-var MAL = {
- "Raw rice":"പച്ചരി","Fort.RR":"പച്ചരി","PMGKAY RR":"പച്ചരി","Raw rice SPL":"പച്ചരി","Free RR":"പച്ചരി","Special RR":"പച്ചരി",
- "Boiled rice":"പുഴുക്കലരി","Fort.BR":"പുഴുക്കലരി","BR F. SPL":"പുഴുക്കലരി","Special BR":"പുഴുക്കലരി",
- "Boiled rice SPL":"പുഴുക്കലരി","Fort.CMR":"പുഴുക്കലരി","CMR":"പുഴുക്കലരി",
- "Matta rice":"മട്ട അരി","Matta rice SPL":"മട്ട അരി",
- "Wheat":"ഗോതമ്പ്","PMGKAY Wheat":"ഗോതമ്പ്",
- "Atta":"ആട്ട","Fort.Atta":"ആട്ട",
- "Sugar":"പഞ്ചസാര","Koil":"മണ്ണെണ്ണ",
- "RAGI":"റാഗി","Ragi":"റാഗി","RAGI POWDER":"റാഗി പൊടി","Ragi Powder":"റാഗി പൊടി",
- "Spl. Festival Kit":"കിറ്റ്","Festival Kit":"കിറ്റ്","FreeKit":"കിറ്റ്","Free Kit":"കിറ്റ്"
-};
-
-function getRowKey(item){
- if(MAL[item]) return MAL[item];
- if(/matta/i.test(item)) return "മട്ട അരി";
- if(/fort\.?rr|raw\s*rice|free\s*rr|special\s*rr|pmgkay\s*rr/i.test(item)) return "പച്ചരി";
- if(/fort\.?br|boiled\s*rice|special\s*br|cmr|br\s*f\./i.test(item)) return "പുഴുക്കലരി";
- if(/wheat/i.test(item)) return "ഗോതമ്പ്";
- if(/atta/i.test(item)) return "ആട്ട";
- if(/sugar/i.test(item)) return "പഞ്ചസാര";
- if(/koil|kerosene/i.test(item)) return "മണ്ണെണ്ണ";
- if(/ragi/i.test(item)) return (/powder/i.test(item) ? "റാഗി പൊടി" : "റാഗി");
- if(/kit/i.test(item)) return "കിറ്റ്";
- return item;
-}
-
-/* Standard board rows (exact order as physical board) */
-var ROWS = ["പുഴുക്കലരി", "പച്ചരി", "മട്ട അരി", "ഗോതമ്പ്", "ആട്ട", "മണ്ണെണ്ണ", "പഞ്ചസാര"];
-
 /* ---- Parser: handles Tab-separated AND Space-separated AND comma-formatted numbers ---- */
 function parseText(text){
  if(!text) return {header:null, entries:[]};
@@ -660,52 +621,80 @@ function editDealerName(){
  }
 }
 
-/* ---- Render Board ---- */
+/* ---- Render Board (Exact layout & 6 columns matching user screenshot) ---- */
 function renderBoard(text, dealerFromApi, apiDist, apiTso, explicitArd, fetchTime){
  var res = parseText(text);
  var entries = res.entries;
 
- /* Aggregate by board row */
- var data = {};
- ROWS.forEach(function(r){data[r] = {aay:0, phh:0, nps:0, npns:0, all:0, has:false};});
- var extraRows = [];
+ /* The 5 schemes in order: AAY, PHH (മുൻഗണന), NPS, NPNS, NPI */
+ var SCHEMES = ["AAY", "PHH", "NPS", "NPNS", "NPI"];
+
+ /* Rows structure */
+ var grid = {
+  "boiled": { AAY: 0, PHH: 0, NPS: 0, NPNS: 0, NPI: 0 },
+  "raw":    { AAY: 0, PHH: 0, NPS: 0, NPNS: 0, NPI: 0 },
+  "matta":  { AAY: 0, PHH: 0, NPS: 0, NPNS: 0, NPI: 0 },
+  "wheat":  { AAY: 0, PHH: 0, NPS: 0, NPNS: 0, NPI: 0 },
+  "atta":   { AAY: 0, PHH: 0, NPS: null, NPNS: 0, NPI: null }, // NPS and NPI empty as in screenshot
+  "sugar":  { AAY: 0, PHH: 0, NPS: 0, NPNS: 0, NPI: 0 },
+  "koil":   { val: 0 },
+  "special": { AAY: "0 kg", PHH: "0 kg", NPS: "0 kg", NPNS: "0 kg", NPI: "0 kg" }
+ };
+
+ var kitAay = 0;
+ var kitAll = 0;
 
  entries.forEach(function(e){
-  var key = getRowKey(e.item);
-  if(!data[key]){
-   data[key] = {aay:0, phh:0, nps:0, npns:0, all:0, has:false};
-   extraRows.push(key);
+  var itm = e.item;
+  var sch = e.scheme;
+  var cb = e.cb;
+
+  // Kerosene / Koil (merged row)
+  if(/koil|kerosene/i.test(itm)){
+   grid.koil.val += cb;
+   return;
   }
-  var d = data[key];
-  d.has = true;
-  if(e.scheme === "AAY") d.aay += e.cb;
-  else if(e.scheme === "PHH") d.phh += e.cb;
-  else if(e.scheme === "NPS") d.nps += e.cb;
-  else if(e.scheme === "NPNS") d.npns += e.cb;
-  else d.all += e.cb;
+
+  // Festival kit tracking for offset netting
+  if(/kit/i.test(itm)){
+   if(sch === "AAY") kitAay += cb;
+   else kitAll += cb;
+   return;
+  }
+
+  // Special items (e.g. BR F. SPL, Special RR, etc.)
+  var isSpl = /spl|special/i.test(itm);
+  if(isSpl){
+   if(Math.abs(cb) > 0.05 && SCHEMES.indexOf(sch) >= 0){
+    var prefix = "SPL";
+    if(/br|boiled/i.test(itm)) prefix = "BR";
+    else if(/rr|raw/i.test(itm)) prefix = "RR";
+    else if(/matta/i.test(itm)) prefix = "Matta";
+    grid.special[sch] = prefix + " " + (Math.round(cb * 10) / 10) + " kg";
+   }
+   return;
+  }
+
+  // Regular commodities
+  var cat = null;
+  if(/matta/i.test(itm)) cat = "matta";
+  else if(/fort\.?br|boiled\s*rice|cmr/i.test(itm)) cat = "boiled";
+  else if(/fort\.?rr|raw\s*rice|pmgkay\s*rr/i.test(itm)) cat = "raw";
+  else if(/wheat/i.test(itm)) cat = "wheat";
+  else if(/atta/i.test(itm)) cat = "atta";
+  else if(/sugar/i.test(itm)) cat = "sugar";
+
+  if(cat && SCHEMES.indexOf(sch) >= 0){
+   if(grid[cat][sch] === null) grid[cat][sch] = 0;
+   grid[cat][sch] += cb;
+  }
  });
 
- /* Cross-scheme offset netting (e.g. AePDS balance transfer where AAY = -43 and ALL = +43 -> net 0) */
- Object.keys(data).forEach(function(key){
-  var d = data[key];
-  if(d.all > 0){
-   ["aay", "phh", "nps", "npns"].forEach(function(sch){
-    if(d[sch] < 0){
-     var offset = Math.min(-d[sch], d.all);
-     d[sch] += offset;
-     d.all -= offset;
-    }
-   });
-  } else if(d.all < 0){
-   ["aay", "phh", "nps", "npns"].forEach(function(sch){
-    if(d[sch] > 0){
-     var offset = Math.min(d[sch], -d.all);
-     d[sch] -= offset;
-     d.all += offset;
-    }
-   });
-  }
- });
+ // If net kit stock is positive, display in special row
+ var netKit = kitAay + kitAll;
+ if(netKit > 0.05){
+  grid.special.AAY = "കിറ്റ് " + (Math.round(netKit * 10) / 10);
+ }
 
  /* Date and Time */
  var now = fetchTime ? new Date(fetchTime) : new Date();
@@ -717,8 +706,7 @@ function renderBoard(text, dealerFromApi, apiDist, apiTso, explicitArd, fetchTim
  var timeStr = pad(hours) + ":" + pad(now.getMinutes()) + " " + ampm;
  var dateStr = pad(now.getDate()) + "/" + pad(now.getMonth()+1) + "/" + now.getFullYear();
 
- document.getElementById("bDate").textContent = dateStr;
- document.getElementById("bTime").textContent = "🕒 " + timeStr;
+ document.getElementById("bDateTime").textContent = dateStr + " " + timeStr;
 
  /* Meta bar & Dealer info */
  var meta = document.getElementById("bMeta");
@@ -728,7 +716,6 @@ function renderBoard(text, dealerFromApi, apiDist, apiTso, explicitArd, fetchTim
   meta.style.display = "flex";
   document.getElementById("bArd").textContent = currentArd;
 
-  // Resolve dealer name: custom saved > API fetched > header
   var dName = "";
   if(dealerFromApi && !/district|tso|month|year/i.test(dealerFromApi)){
     dName = dealerFromApi;
@@ -740,7 +727,6 @@ function renderBoard(text, dealerFromApi, apiDist, apiTso, explicitArd, fetchTim
   }
   document.getElementById("bDealer").textContent = dName || "—";
 
-  // Resolve District and TSO
   var loc = getDistrictAndTso(
     currentArd,
     apiDist || (res.header && res.header.dist),
@@ -754,7 +740,7 @@ function renderBoard(text, dealerFromApi, apiDist, apiTso, explicitArd, fetchTim
     periodVal = months[now.getMonth()] + " " + now.getFullYear();
   }
   document.getElementById("bPeriod").textContent = periodVal;
-  document.getElementById("bFoot").textContent = "ARD " + currentArd + (dName ? " · " + dName : "") + " · " + loc.full + " · " + dateStr + " " + timeStr;
+  document.getElementById("bFoot").textContent = "ARD " + currentArd + (dName ? " - " + dName : "") + " - " + loc.full + " - " + dateStr + " " + timeStr;
  } else {
   meta.style.display = "none";
   document.getElementById("bFoot").textContent = "";
@@ -763,63 +749,60 @@ function renderBoard(text, dealerFromApi, apiDist, apiTso, explicitArd, fetchTim
  /* Build table */
  if(!entries.length){
   document.getElementById("bBody").innerHTML =
-   '<tr><td colspan="5" style="padding:25px 4px;color:#888;font-weight:700">' +
+   '<tr><td colspan="6" style="padding:25px 4px;color:#888;font-weight:700">' +
    'ഡാറ്റ ലഭ്യമല്ല</td></tr>';
   return;
  }
 
- function fv(n){
-  if(Math.abs(n) < 0.05) return "";
-  return String(Math.round(n * 10) / 10);
+ function fmtKg(n){
+  if(n === null) return "";
+  if(Math.abs(n) < 0.05) return "0 kg";
+  return (Math.round(n * 10) / 10) + " kg";
  }
 
+ var rowsDef = [
+  { name: "അരി (പുഴുക്കലരി)", data: grid.boiled },
+  { name: "പച്ചരി", data: grid.raw },
+  { name: "മട്ട അരി", data: grid.matta },
+  { name: "ഗോതമ്പ്", data: grid.wheat },
+  { name: "ആട്ട", data: grid.atta },
+  { name: "മണ്ണെണ്ണ", isMerged: true, val: (Math.round(grid.koil.val * 10) / 10) + " ltr" },
+  { name: "പഞ്ചസാര", data: grid.sugar },
+  { name: "സ്പെഷ്യൽ വിതരണം", isSpecial: true, data: grid.special }
+ ];
+
  var html = "";
- var specialKitText = "";
- var allRows = ROWS.concat(extraRows);
 
- allRows.forEach(function(name){
-  var d = data[name];
-  if(!d) return;
-
-  var isStandard = ROWS.indexOf(name) >= 0;
-  var totalVal = Math.abs(d.aay) + Math.abs(d.phh) + Math.abs(d.nps) + Math.abs(d.npns) + Math.abs(d.all);
-
-  // If item is Kit and has positive stock, capture for special row
-  if((name === "കിറ്റ്" || /kit/i.test(name)) && totalVal >= 0.05){
-   var kitBal = (d.aay + d.phh + d.nps + d.npns + d.all);
-   if(kitBal > 0.05){
-    specialKitText = " (കിറ്റ്: " + fv(kitBal) + ")";
-   }
+ rowsDef.forEach(function(r){
+  if(r.isMerged){
+   html += '<tr>' +
+     '<td class="c-item">' + r.name + '</td>' +
+     '<td colspan="5" class="c-merged">' + r.val + '</td>' +
+     '</tr>';
    return;
   }
 
-  // For non-standard extra rows, ONLY show if stock is non-zero
-  if(!isStandard && totalVal < 0.05) return;
-
-  // For standard rows, if completely unused, skip
-  if(!d.has && totalVal < 0.05) return;
-
-  var aay = fv(d.aay);
-  var phh = fv(d.phh);
-  var nps = fv(d.nps);
-  var npns = fv(d.npns);
-
-  /* If only "ALL" scheme has value (e.g. Koil), show in npns column as in physical board */
-  if(d.all > 0 && !d.aay && !d.phh && !d.nps && !d.npns){
-   npns = fv(d.all);
+  if(r.isSpecial){
+   html += '<tr>' +
+     '<td class="c-item">' + r.name + '</td>' +
+     '<td class="c-val">' + (r.data.AAY || "0 kg") + '</td>' +
+     '<td class="c-val">' + (r.data.PHH || "0 kg") + '</td>' +
+     '<td class="c-val">' + (r.data.NPS || "0 kg") + '</td>' +
+     '<td class="c-val">' + (r.data.NPNS || "0 kg") + '</td>' +
+     '<td class="c-val">' + (r.data.NPI || "0 kg") + '</td>' +
+     '</tr>';
+   return;
   }
 
   html += '<tr>' +
-   '<td class="c-item">' + name + '</td>' +
-   '<td class="' + (aay ? "c-val" : "c-empty") + '">' + (aay || "") + '</td>' +
-   '<td class="' + (phh ? "c-val" : "c-empty") + '">' + (phh || "") + '</td>' +
-   '<td class="' + (nps ? "c-val" : "c-empty") + '">' + (nps || "") + '</td>' +
-   '<td class="' + (npns ? "c-val" : "c-empty") + '">' + (npns || "") + '</td>' +
-   '</tr>';
+    '<td class="c-item">' + r.name + '</td>' +
+    '<td class="' + (r.data.AAY !== null ? 'c-val' : 'c-empty') + '">' + fmtKg(r.data.AAY) + '</td>' +
+    '<td class="' + (r.data.PHH !== null ? 'c-val' : 'c-empty') + '">' + fmtKg(r.data.PHH) + '</td>' +
+    '<td class="' + (r.data.NPS !== null ? 'c-val' : 'c-empty') + '">' + fmtKg(r.data.NPS) + '</td>' +
+    '<td class="' + (r.data.NPNS !== null ? 'c-val' : 'c-empty') + '">' + fmtKg(r.data.NPNS) + '</td>' +
+    '<td class="' + (r.data.NPI !== null ? 'c-val' : 'c-empty') + '">' + fmtKg(r.data.NPI) + '</td>' +
+    '</tr>';
  });
-
- /* Special distribution row (physical board 8th row) */
- html += '<tr class="row-special"><td colspan="5">സ്പെഷ്യൽ വിതരണം' + specialKitText + '</td></tr>';
 
  document.getElementById("bBody").innerHTML = html;
 }
@@ -833,13 +816,12 @@ function shareToWhatsApp(){
   }
   var dealer = document.getElementById("bDealer").textContent;
   var loc = document.getElementById("bDistTso").textContent;
-  var dateStr = document.getElementById("bDate").textContent;
-  var timeStr = document.getElementById("bTime").textContent.replace(/🕒\s*/, "");
+  var dtStr = document.getElementById("bDateTime").textContent;
 
   var text = "📋 *റേഷൻ സ്റ്റോക്ക് നിലവാരം*\n";
   text += "🏪 *ARD:* " + ardVal + (dealer && dealer !== "—" ? " (" + dealer + ")" : "") + "\n";
   text += "📍 *" + loc + "*\n";
-  text += "📅 *തീയതി:* " + dateStr + (timeStr ? " " + timeStr : "") + "\n";
+  text += "📅 *തീയതി:* " + dtStr + "\n";
   text += "━━━━━━━━━━━━━━━━━━━━\n";
 
   var rows = document.querySelectorAll("#bBody tr");
@@ -849,17 +831,29 @@ function shareToWhatsApp(){
     if(!item) return;
     var itemName = item.textContent.trim();
     var cells = r.querySelectorAll("td");
-    if(cells.length < 5) return;
+
+    if(cells.length === 2 && cells[1].getAttribute("colspan")){
+      var kVal = cells[1].textContent.trim();
+      if(kVal && kVal !== "0 ltr"){
+        hasItems = true;
+        text += "🪔 *" + itemName + ":* " + kVal + "\n";
+      }
+      return;
+    }
+
+    if(cells.length < 6) return;
     var aay = cells[1].textContent.trim();
     var phh = cells[2].textContent.trim();
     var nps = cells[3].textContent.trim();
     var npns = cells[4].textContent.trim();
+    var npi = cells[5].textContent.trim();
 
     var parts = [];
-    if(aay) parts.push("AAY: " + aay + "kg");
-    if(phh) parts.push("PHH: " + phh + "kg");
-    if(nps) parts.push("NPS: " + nps + "kg");
-    if(npns) parts.push("NPNS: " + npns + "kg");
+    if(aay && aay !== "0 kg") parts.push("AAY: " + aay);
+    if(phh && phh !== "0 kg") parts.push("മുൻഗണന: " + phh);
+    if(nps && nps !== "0 kg") parts.push("NPS: " + nps);
+    if(npns && npns !== "0 kg") parts.push("NPNS: " + npns);
+    if(npi && npi !== "0 kg") parts.push("NPI: " + npi);
 
     if(parts.length){
       hasItems = true;
@@ -891,7 +885,7 @@ var CFG = {ard:""};
 try{var c = localStorage.getItem("rsb_cfg"); if(c) CFG = JSON.parse(c);}catch(e){}
 document.getElementById("ard").value = CFG.ard || "";
 
-function doSearch(isFresh){
+function doSearch(){
  var ardVal = document.getElementById("ard").value.replace(/\D/g, "");
  var msg = document.getElementById("statusMsg");
  var btn = document.querySelector(".search-row button");
@@ -905,7 +899,6 @@ function doSearch(isFresh){
  CFG.ard = ardVal;
  try{localStorage.setItem("rsb_cfg", JSON.stringify(CFG));}catch(e){}
 
- // Instantly update header to new ARD and reset dealer until fetched
  document.getElementById("bMeta").style.display = "flex";
  document.getElementById("bArd").textContent = ardVal;
  document.getElementById("bDealer").textContent = DEALERS[ardVal] || "എടുക്കുന്നു...";
