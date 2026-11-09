@@ -2,7 +2,7 @@
 <html lang="ml">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>റേഷൻ സ്റ്റോക്ക് ബോർഡ്</title>
 
 <!-- PWA & Mobile Meta -->
@@ -92,18 +92,23 @@ html,body{
 }
 .action-bar button{
   flex:1;
+  padding:8px 8px;
   padding:9px 10px;
   border:0;
+  border-radius:6px;
   border-radius:8px;
   font-family:inherit;
   font-size:12.5px;
+  font-weight:700;
   font-weight:800;
   cursor:pointer;
   display:inline-flex;
   align-items:center;
   justify-content:center;
+  gap:5px;
   gap:6px;
   white-space:nowrap;
+  box-shadow:0 1px 2px rgba(0,0,0,.08);
   box-shadow:0 1.5px 3px rgba(0,0,0,.1);
   transition:transform .08s ease, filter .15s ease;
 }
@@ -136,6 +141,7 @@ html,body{
 
 /* Board Header Title */
 .b-head-bar{
+  padding:10px 8px 6px;
   padding:8px 8px 6px;
   background:#fff;
   display:flex;
@@ -151,8 +157,10 @@ html,body{
   white-space:nowrap;
 }
 .b-date-time{
+  font-size:11px;
   font-size:10.5px;
   font-weight:700;
+  color:#64748b;
   color:#475569;
   background:#f1f5f9;
   padding:3px 7px;
@@ -286,12 +294,18 @@ html,body{
 /* Footer */
 .b-foot{
   background:#f8fafc;
+  padding:4px 6px;
   padding:5px 8px;
   font-size:10px;
   font-weight:700;
+  color:#64748b;
+  text-align:right;
   color:#475569;
   text-align:center;
   border-top:1.5px solid #000;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
   line-height:1.35;
   word-break:break-word;
 }
@@ -330,27 +344,102 @@ html,body{
   }
   @page{size:A4 landscape;margin:8mm}
 }
+
+/* Screen presentation; printed stock board retains its compact layout. */
+@media screen{
+  html,body{background:#f3f5f8;color:#172b3a}
+  .wrap{max-width:900px;padding:32px 24px 36px}
+  .app-header{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+  .app-mark{display:grid;place-items:center;width:48px;height:48px;flex-shrink:0;background:#b91c1c;color:white;border-radius:14px}
+  .app-mark svg{width:26px;height:26px}
+  .app-header h1{font-size:23px;line-height:1.6;font-weight:800;letter-spacing:-.5px}
+  .app-header p{font-size:12px;color:#64748b;line-height:1.8}
+  .search-area{padding:22px 24px 16px;border:1px solid #e2e8f0;border-radius:16px;margin-bottom:18px;box-shadow:0 4px 16px #172b3a04}
+  .search-area label{font-size:13px;margin-bottom:10px}
+  .search-row{gap:10px}
+  .search-row input{border:1px solid #cbd5e1;border-radius:9px;padding:12px 14px;font-weight:600;background:#fff;min-height:48px}
+  .search-row input::placeholder{letter-spacing:0;font-weight:400;color:#64748b;font-size:13px}
+  .search-row button{border-radius:9px;padding:12px 20px;min-height:48px;transition:background .15s}
+  .search-row button:hover:not(:disabled){background:#991b1b}
+  .search-row button:disabled{cursor:wait}
+  .search-msg{margin-top:10px;line-height:1.8;min-height:21px}
+  .search-msg.err{color:#b91c1c}
+  .search-msg.ok{color:#15803d}
+  .action-bar{max-width:none;justify-content:flex-end;gap:10px;margin-bottom:14px}
+  .action-bar button{flex:0 1 auto;padding:10px 16px;border:1px solid #cbd5e1;border-radius:9px;box-shadow:none;font-size:12px;min-height:44px;gap:8px}
+  .action-bar svg{width:17px;height:17px;flex-shrink:0}
+  .btn-wa{background:#ecfdf3;color:#166534;border-color:#bbdfc5!important}
+  .btn-wa:hover{background:#dcfce7}
+  .btn-print{background:#fff;color:#334155}
+  .btn-print:hover{background:#e9eef4}
+  .board-scroll{border-radius:16px;box-shadow:0 6px 24px #172b3a06;margin-bottom:16px}
+  #board{border:1px solid #d5dee8;border-radius:16px;box-shadow:none}
+  .b-head-bar{padding:22px 20px;gap:12px;flex-wrap:wrap}
+  .b-red-title{font-size:22px;line-height:1.7;color:#172b3a;white-space:normal;font-weight:800}
+  .b-date-time{font-size:11px;background:#f8fafc;border-color:#e2e8f0;padding:6px 9px;border-radius:6px;white-space:normal}
+  .b-date-time:empty{display:none}
+  .b-meta{padding:14px 20px;gap:10px;border-bottom:1px solid #d5dee8;font-size:12px;background:#fafbfd}
+  .meta-col{white-space:normal;overflow-wrap:anywhere}
+  .loc-badge{background:#edf2f7;border:0;font-size:11px;padding:4px 8px;white-space:normal}
+  #board th,#board td{border:1px solid #d5dee8}
+  #board th{font-size:12px;line-height:1.7;padding:14px 6px;font-weight:800;color:#263747}
+  #board th.h-item,#board th.h-npns,#board th.h-npi{background:#f1f5f9}
+  #board th.h-aay{background:#fef08a}
+  #board th.h-phh{background:#fbcfe8}
+  #board th.h-nps{background:#bae6fd}
+  #board td.c-item{padding:15px 12px;font-size:13px;line-height:1.8;color:#263747;font-weight:600}
+  #board td.c-val,#board td.c-merged{padding:15px 5px;font-size:14px;color:#263747;font-weight:600}
+  #board tbody tr:nth-child(even) td{background:#f8fafc}
+  #board tbody tr:hover td{background:#eef3f8}
+  #board .empty-state{padding:46px 20px!important;color:#64748b!important;font-size:13px;font-weight:400!important;line-height:2}
+  .b-foot{padding:12px 16px;border-top:1px solid #d5dee8;font-size:11px;white-space:normal;line-height:1.8;background:#fafbfd}
+  .b-foot:empty{display:none}
+  .source-note{font-size:11px;color:#64748b;text-align:center;line-height:1.9;padding:0 12px}
+  button:focus-visible,input:focus-visible,.dealer-tag:focus-visible{outline:3px solid #2563eb;outline-offset:3px}
+  @media(max-width:599px){
+    .wrap{padding:20px 12px 28px}
+    .app-header{gap:10px;margin-bottom:20px}
+    .app-header h1{font-size:20px}
+    .app-header p{font-size:10px}
+    .app-mark{width:42px;height:42px;border-radius:12px}
+    .search-area{padding:16px 14px 10px}
+    .search-row button{padding:10px 12px;font-size:12px}
+    .action-bar button{flex:1;padding:10px 8px;font-size:11px}
+    .b-head-bar{padding:16px 12px}
+    .b-red-title{font-size:18px}
+    .b-meta{padding:12px;font-size:11px}
+    #board th{padding:12px 2px;font-size:10px}
+    #board td.c-item{padding:12px 6px;font-size:11px}
+    #board td.c-val,#board td.c-merged{padding:12px 2px;font-size:11px;white-space:normal;overflow-wrap:anywhere}
+  }
+  @media(max-width:359px){.search-row{flex-direction:column}.app-header h1{font-size:18px}}
+}
+
 </style>
 </head>
 <body>
 <div class="wrap">
+<header class="app-header noprint">
+ <div class="app-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l2-6h14l2 6M3 9h18v3a3 3 0 0 1-4 2.8 3 3 0 0 1-5 0 3 3 0 0 1-5 0A3 3 0 0 1 3 12V9Z"/><path d="M5 15v6h14v-6M9 21v-5h6v5"/></svg></div>
+ <div><h1>റേഷൻ സ്റ്റോക്ക് ബോർഡ്</h1><p>കടയിലെ സ്റ്റോക്ക് വിവരങ്ങൾ · AePDS കേരള</p></div>
+</header>
 
 <!-- Search -->
 <div class="search-area noprint">
  <label for="ard">റേഷൻ കടയുടെ ARD നമ്പർ (7 അക്കം):</label>
  <div class="search-row">
-  <input id="ard" inputmode="numeric" maxlength="7" placeholder="7 അക്ക ARD നമ്പർ"
+  <input id="ard" type="text" aria-describedby="statusMsg" inputmode="numeric" maxlength="7" placeholder="7 അക്ക ARD നമ്പർ"
    oninput="this.value=this.value.replace(/\D/g,'')"
    onkeydown="if(event.key==='Enter')doSearch()">
   <button onclick="doSearch()">സ്റ്റോക്ക് എടുക്കുക</button>
  </div>
- <div id="statusMsg" class="search-msg"></div>
+ <div id="statusMsg" class="search-msg" role="status" aria-live="polite" aria-atomic="true"></div>
 </div>
 
 <!-- Actions: WhatsApp, Print -->
 <div class="action-bar noprint">
- <button class="btn-wa" onclick="shareToWhatsApp()" title="വാട്സാപ്പിൽ പങ്കിടുക">📲 വാട്സാപ്പിൽ ഷെയർ</button>
- <button class="btn-print" onclick="window.print()" title="ബോർഡ് പ്രിന്റ് ചെയ്യുക">🖨 പ്രിന്റ് ചെയ്യുക</button>
+ <button class="btn-wa" onclick="shareToWhatsApp()" title="വാട്സാപ്പിൽ പങ്കിടുക"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a9 9 0 0 1-13.5 7.8L3 21l1.7-4.5A9 9 0 1 1 21 11.5Z"/><path d="M8 8c0 4 4 8 8 8l1-3-3-1-1 1-2-2 1-1-1-3-3 1Z"/></svg> വാട്സാപ്പിൽ ഷെയർ</button>
+ <button class="btn-print" onclick="window.print()" title="ബോർഡ് പ്രിന്റ് ചെയ്യുക"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8V3h10v5M7 17H4V9h16v8h-3"/><path d="M7 14h10v7H7zM17 11h.01"/></svg> പ്രിന്റ് ചെയ്യുക</button>
 </div>
 
 <!-- Board (Exact match to user screenshot) -->
@@ -370,19 +459,19 @@ html,body{
    <span class="meta-col text-right" id="bPeriodWrap"><b>മാസം:</b> <span id="bPeriod">—</span></span>
   </div>
  </div>
- <table>
+ <table aria-label="റേഷൻ സ്റ്റോക്ക് വിവരം">
   <thead>
    <tr>
-    <th class="h-item">ഇനം</th>
-    <th class="h-aay">എ.എ.<br>വൈ</th>
-    <th class="h-phh">മുൻഗ<br>ണന</th>
-    <th class="h-nps">എൻ.പി.<br>എസ്</th>
-    <th class="h-npns">എൻ.പി.<br>എൻ.എസ്</th>
-    <th class="h-npi">എൻ.പി.<br>ഐ</th>
+    <th scope="col" class="h-item">ഇനം</th>
+    <th scope="col" class="h-aay">എ.എ.<br>വൈ</th>
+    <th scope="col" class="h-phh">മുൻഗ<br>ണന</th>
+    <th scope="col" class="h-nps">എൻ.പി.<br>എസ്</th>
+    <th scope="col" class="h-npns">എൻ.പി.<br>എൻ.എസ്</th>
+    <th scope="col" class="h-npi">എൻ.പി.<br>ഐ</th>
    </tr>
   </thead>
   <tbody id="bBody">
-   <tr><td colspan="6" style="padding:25px 4px;color:#888;font-weight:700">
+   <tr><td colspan="6" class="empty-state" style="padding:25px 4px;color:#888;font-weight:700">
     ARD നമ്പർ നൽകി "സ്റ്റോക്ക് എടുക്കുക" അമർത്തുക
    </td></tr>
   </tbody>
@@ -391,7 +480,7 @@ html,body{
 </div>
 </div>
 
-<p class="noprint" style="font-size:10.5px;color:#888;text-align:center;margin-top:6px">
+<p class="source-note noprint">
  AePDS കേരള പോർട്ടൽ ഡാറ്റ. ബോർഡിൽ എഴുതും മുൻപ് ePOS വിവരങ്ങളുമായി ഒത്തുനോക്കുക.
 </p>
 
@@ -725,6 +814,7 @@ function renderBoard(text, dealerFromApi, apiDist, apiTso, explicitArd, fetchTim
  var timeStr = pad(hours) + ":" + pad(now.getMinutes()) + " " + ampm;
  var dateStr = pad(now.getDate()) + "/" + pad(now.getMonth()+1) + "/" + now.getFullYear();
 
+ document.getElementById("bDateTime").textContent = dateStr + " " + timeStr;
  document.getElementById("bDateTime").textContent = dateStr + " • " + timeStr;
 
  /* Meta bar & Dealer info */
@@ -908,13 +998,17 @@ function doSearch(){
  var ardVal = document.getElementById("ard").value.replace(/\D/g, "");
  var msg = document.getElementById("statusMsg");
  var btn = document.querySelector(".search-row button");
+ if(btn && btn.disabled) return;
 
  if(ardVal.length !== 7){
   msg.className = "search-msg err";
   msg.textContent = "ശരിയായ 7 അക്ക ARD നമ്പർ നൽകുക";
+  document.getElementById("ard").setAttribute("aria-invalid", "true");
+  document.getElementById("ard").focus();
   return;
  }
 
+ document.getElementById("ard").removeAttribute("aria-invalid");
  CFG.ard = ardVal;
  try{localStorage.setItem("rsb_cfg", JSON.stringify(CFG));}catch(e){}
 
