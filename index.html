@@ -388,7 +388,7 @@ html,body{
   #board th.h-phh{background:#fbcfe8}
   #board th.h-nps{background:#bae6fd}
   #board td.c-item{padding:15px 12px;font-size:13px;line-height:1.8;color:#263747;font-weight:600}
-  #board td.c-val,#board td.c-merged{padding:15px 5px;font-size:14px;color:#263747;font-weight:600}
+  #board td.c-val,#board td.c-merged{padding:15px 5px;font-size:14px;color:#0f172a;font-weight:800}
   #board tbody tr:nth-child(even) td{background:#f8fafc}
   #board tbody tr:hover td{background:#eef3f8}
   #board .empty-state{padding:46px 20px!important;color:#64748b!important;font-size:13px;font-weight:400!important;line-height:2}
@@ -397,20 +397,29 @@ html,body{
   .source-note{font-size:11px;color:#64748b;text-align:center;line-height:1.9;padding:0 12px}
   button:focus-visible,input:focus-visible,.dealer-tag:focus-visible{outline:3px solid #2563eb;outline-offset:3px}
   @media(max-width:599px){
-    .wrap{padding:20px 12px 28px}
-    .app-header{gap:10px;margin-bottom:20px}
-    .app-header h1{font-size:20px}
-    .app-header p{font-size:10px}
-    .app-mark{width:42px;height:42px;border-radius:12px}
-    .search-area{padding:16px 14px 10px}
-    .search-row button{padding:10px 12px;font-size:12px}
-    .action-bar button{flex:1;padding:10px 8px;font-size:11px}
-    .b-head-bar{padding:16px 12px}
-    .b-red-title{font-size:18px}
-    .b-meta{padding:12px;font-size:11px}
-    #board th{padding:12px 2px;font-size:10px}
-    #board td.c-item{padding:12px 6px;font-size:11px}
-    #board td.c-val,#board td.c-merged{padding:12px 2px;font-size:11px;white-space:normal;overflow-wrap:anywhere}
+    .wrap{padding:8px 6px 12px}
+    .app-header{display:none}
+    .search-area{padding:10px 10px 6px;margin-bottom:8px;border-radius:10px}
+    .search-area label{font-size:11px;margin-bottom:6px}
+    .search-row{gap:6px}
+    .search-row input{padding:8px 10px;min-height:44px}
+    .search-row button{padding:8px 10px;min-height:44px;font-size:11px}
+    .search-msg{margin-top:4px;min-height:0;font-size:10.5px;line-height:1.5}
+    .search-msg:empty{display:none}
+    .action-bar{gap:6px;margin-bottom:8px}
+    .action-bar button{flex:1;padding:7px 8px;min-height:44px;font-size:11px}
+    .board-scroll{margin-bottom:8px;border-radius:10px}
+    #board{border-radius:10px}
+    .b-head-bar{padding:8px 10px;gap:4px 8px}
+    .b-red-title{font-size:16px;line-height:1.5}
+    .b-date-time{padding:3px 5px;font-size:10px;line-height:1.4}
+    .b-meta{padding:6px 10px;gap:4px;font-size:10.5px}
+    .loc-badge{padding:2px 5px;font-size:10px}
+    #board th{padding:7px 2px;font-size:10px;line-height:1.4}
+    #board td.c-item{padding:6px;font-size:11px;line-height:1.4}
+    #board td.c-val,#board td.c-merged{padding:6px 2px;font-size:11px;line-height:1.4;white-space:normal;overflow-wrap:anywhere}
+    .b-foot{padding:6px 8px;font-size:9px;line-height:1.4}
+    .source-note{font-size:9px;line-height:1.5;padding:0 6px}
   }
   @media(max-width:359px){.search-row{flex-direction:column}.app-header h1{font-size:18px}}
 }
