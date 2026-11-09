@@ -224,43 +224,45 @@ html,body{
   word-wrap:break-word;
   padding:7px 1px;
 }
-#board th.h-item{background:#ffffff;width:24%}
-#board th.h-aay{background:#fde047;width:15.2%}
-#board th.h-phh{background:#f472b6;width:15.2%}
-#board th.h-nps{background:#38bdf8;width:15.2%}
-#board th.h-npns{background:#ffffff;width:15.2%}
-#board th.h-npi{background:#ffffff;width:15.2%}
+#board th.h-item{background:#ffffff;width:25%}
+#board th.h-aay{background:#fde047;width:15%}
+#board th.h-phh{background:#f472b6;width:15%}
+#board th.h-nps{background:#38bdf8;width:15%}
+#board th.h-npns{background:#ffffff;width:15%}
+#board th.h-npi{background:#ffffff;width:15%}
 
 /* Data cells */
 #board td.c-item{
   text-align:left;
-  padding-left:5px;
+  padding:5px 2px 5px 4px;
   font-weight:800;
-  font-size:12px;
+  font-size:11.5px;
   color:#000;
   background:#fff;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  line-height:1.2;
+  word-break:break-word;
+  white-space:normal;
 }
 #board td.c-val{
   font-weight:700;
-  font-size:12px;
+  font-size:11.5px;
   color:#000;
   background:#fff;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
   white-space:nowrap;
+  padding:6px 1px;
 }
 #board td.c-empty{
   background:#fff;
 }
 #board td.c-merged{
   font-weight:700;
-  font-size:12.5px;
+  font-size:12px;
   color:#000;
   background:#fff;
   text-align:center;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  padding:6px 1px;
 }
 
 /* Footer */
@@ -768,7 +770,7 @@ function renderBoard(text, dealerFromApi, apiDist, apiTso, explicitArd, fetchTim
   { name: "ആട്ട", data: grid.atta },
   { name: "മണ്ണെണ്ണ", isMerged: true, val: (Math.round(grid.koil.val * 10) / 10) + " ltr" },
   { name: "പഞ്ചസാര", data: grid.sugar },
-  { name: "സ്പെഷ്യൽ വിതരണം", isSpecial: true, data: grid.special }
+  { name: "സ്പെഷ്യൽ<br>വിതരണം", isSpecial: true, data: grid.special }
  ];
 
  var html = "";
@@ -915,7 +917,10 @@ function doSearch(){
 
  var url = "/api/stock?dist=" + dist + "&tso=" + tso + "&ard=" + ardVal + "&month=" + (d.getMonth() + 1) + "&year=" + d.getFullYear() + "&_t=" + Date.now();
 
- fetch(url, { cache: "no-store" })
+ fetch(url, {
+   cache: "no-store",
+   headers: { "Cache-Control": "no-cache", "Pragma": "no-cache" }
+ })
   .then(function(r){return r.json();})
   .then(function(j){
    if(j.error){

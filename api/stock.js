@@ -271,7 +271,9 @@ module.exports = async (req, res) => {
       return res.status(502).json({ error: "പോർട്ടൽ പേജിൽ നിന്ന് ടേബിൾ വിവരങ്ങൾ വായിക്കാൻ കഴിഞ്ഞില്ല" });
     }
 
-    res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+    res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0, s-maxage=0");
+    res.setHeader("CDN-Cache-Control", "no-store");
+    res.setHeader("Vercel-CDN-Cache-Control", "no-store");
     res.setHeader("Pragma", "no-cache");
     res.setHeader("Expires", "0");
     return res.status(200).json({
