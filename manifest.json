@@ -4,8 +4,8 @@
   "description": "കേരള AePDS റേഷൻ കട സ്റ്റോക്ക് വിവര ബോർഡ്",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#e8ecf2",
-  "theme_color": "#2e7d32",
+  "background_color": "#f1f5f9",
+  "theme_color": "#b91c1c",
   "orientation": "portrait-primary",
   "icons": [
     {

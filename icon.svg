@@ -1,16 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="100" fill="#2e7d32"/>
-  <rect x="40" y="40" width="432" height="432" rx="24" fill="#ffffff" stroke="#1b5e20" stroke-width="14"/>
-  <rect x="40" y="40" width="432" height="96" rx="24" fill="#2e7d32"/>
-  <rect x="40" y="110" width="432" height="26" fill="#2e7d32"/>
+  <rect width="512" height="512" rx="100" fill="#b91c1c"/>
+  <rect x="40" y="40" width="432" height="432" rx="24" fill="#ffffff" stroke="#991b1b" stroke-width="14"/>
+  <rect x="40" y="40" width="432" height="96" rx="24" fill="#b91c1c"/>
+  <rect x="40" y="110" width="432" height="26" fill="#b91c1c"/>
   <text x="256" y="105" font-family="sans-serif" font-size="44" font-weight="900" fill="#ffffff" text-anchor="middle">റേഷൻ ബോർഡ്</text>
-  <rect x="70" y="160" width="372" height="48" fill="#e8f5e9" stroke="#2e7d32" stroke-width="4"/>
-  <text x="256" y="194" font-family="sans-serif" font-size="24" font-weight="800" fill="#1b5e20" text-anchor="middle">സ്റ്റോക്ക് നിലവാരം</text>
-  <!-- Grid representation -->
-  <rect x="70" y="230" width="372" height="42" fill="#cfe6f7" stroke="#2e7d32" stroke-width="3"/>
-  <rect x="70" y="272" width="372" height="42" fill="#fbf0a8" stroke="#2e7d32" stroke-width="3"/>
-  <rect x="70" y="314" width="372" height="42" fill="#dcd6f2" stroke="#2e7d32" stroke-width="3"/>
-  <rect x="70" y="356" width="372" height="42" fill="#d4ecc8" stroke="#2e7d32" stroke-width="3"/>
-  <rect x="70" y="398" width="372" height="42" fill="#f6cfd6" stroke="#2e7d32" stroke-width="3"/>
+  <rect x="70" y="160" width="372" height="48" fill="#fef2f2" stroke="#b91c1c" stroke-width="4"/>
+  <text x="256" y="194" font-family="sans-serif" font-size="24" font-weight="800" fill="#991b1b" text-anchor="middle">സ്റ്റോക്ക് നിലവാരം</text>
+  <!-- Grid representation with scheme colors -->
+  <rect x="70" y="230" width="372" height="42" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+  <rect x="70" y="272" width="372" height="42" fill="#fde047" stroke="#000000" stroke-width="2"/>
+  <rect x="70" y="314" width="372" height="42" fill="#f472b6" stroke="#000000" stroke-width="2"/>
+  <rect x="70" y="356" width="372" height="42" fill="#38bdf8" stroke="#000000" stroke-width="2"/>
+  <rect x="70" y="398" width="372" height="42" fill="#ffffff" stroke="#000000" stroke-width="2"/>
 </svg>
 
