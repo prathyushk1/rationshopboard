@@ -866,7 +866,7 @@ function renderBoard(text, dealerFromApi, apiDist, apiTso, explicitArd, fetchTim
     periodVal = months[now.getMonth()] + " " + now.getFullYear();
   }
   document.getElementById("bPeriod").textContent = periodVal;
-  document.getElementById("bFoot").textContent = "ARD " + currentArd + (dName ? " - " + dName : "") + " - " + loc.full + " - " + dateStr + " " + timeStr;
+  document.getElementById("bFoot").textContent = "Last updated: " + dateStr + " • " + timeStr;
  } else {
   meta.style.display = "none";
   document.getElementById("bFoot").textContent = "";
